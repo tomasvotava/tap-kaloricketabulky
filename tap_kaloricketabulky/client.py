@@ -97,6 +97,31 @@ class _KaloricStream(Stream):
         return _to_date(end_cfg) if end_cfg else datetime.now(tz=UTC).date()
 
 
+class RangeSnapshotStream(_KaloricStream):
+    """FULL_TABLE: emit the complete current series for a metric each run.
+
+    The endpoint returns the entire [from, to] series in ONE request, so incremental windowing
+    would save zero requests while risking data loss: two runs sharing a window end but
+    different starts collide on the primary key, and an upsert target would overwrite the
+    broader window with the narrower one. FULL_TABLE always pulls [start_date, end] and emits
+    the faithful Snapshot. Late edits to past days are picked up automatically (lookback is moot).
+    `replication_key` is None, so the SDK reports replication_method == FULL_TABLE.
+    """
+
+    sdk_method: str
+    metric: object | None = None  # SnapshotType member, or None for the optional list
+
+    def _fetch(self, start: date, end: date) -> Iterable[object]:
+        if self.metric is None:
+            return cast(Iterable[object], self.client.call(self.sdk_method, start, end))
+        return [self.client.call(self.sdk_method, self.metric, start, end)]
+
+    def get_records(self, context: Context | None) -> Iterable[dict[str, object]]:
+        start, end = self._start_floor.date(), self._end_date()
+        for snap in self._fetch(start, end):
+            yield cast(dict[str, object], cast(Any, snap).model_dump(mode="json", by_alias=False))
+
+
 class PerDayStream(_KaloricStream):
     """INCREMENTAL: one record per calendar day; injects the queried day as `date`."""
 
