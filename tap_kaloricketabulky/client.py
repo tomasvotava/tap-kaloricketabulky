@@ -98,31 +98,21 @@ class _KaloricStream(Stream):
 
 
 class PerDayStream(_KaloricStream):
-    """INCREMENTAL: one record per calendar day; injects the queried day as `date`.
-
-    Lookback is applied by shifting the starting bookmark back, so ascending emission stays
-    valid for is_sorted=True (no InvalidStreamSortException). Same-day re-pulls within lookback
-    are the intended idempotent 'latest version of that day' behaviour.
-    """
+    """INCREMENTAL: one record per calendar day; injects the queried day as `date`."""
 
     replication_key = "date"
-    is_sorted = True
+    # Lookback re-emits days below the prior bookmark; the window's bounded end ensures the
+    # SDK still records the true max key as the new bookmark after each run.
+    is_sorted = False
     sdk_method: str
 
-    def get_starting_timestamp(self, context: Context | None) -> datetime | None:
-        try:
-            ts = super().get_starting_timestamp(context)
-        except ValueError:
-            return self._start_floor
-        if ts is None:
-            return None
-        lookback = timedelta(days=int(self.config.get("lookback_days", 3)))
-        return max(ts - lookback, self._start_floor)
-
     def window(self, context: Context | None) -> tuple[date, date]:
-        ts = self.get_starting_timestamp(context)
-        start = ts.date() if ts is not None else self._start_floor.date()
-        return start, self._end_date()
+        floor = self._start_floor.date()
+        raw = self.get_starting_replication_key_value(context)
+        if raw is None:  # first run: no prior bookmark
+            return floor, self._end_date()
+        lookback = timedelta(days=int(self.config.get("lookback_days", 3)))
+        return max(_to_date(str(raw)) - lookback, floor), self._end_date()
 
     def fetch(self, day: date) -> Mapping[str, object]:
         """Return the record body for one day (without the injected `date`). Override per stream."""
