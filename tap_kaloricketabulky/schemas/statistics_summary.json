@@ -1,0 +1,443 @@
+{
+  "description": "The statistics summary: today's figures, weekly bars, and month weight.",
+  "properties": {
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "today_energy": {
+      "default": null,
+      "title": "Today Energy",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "today_energy_target": {
+      "default": null,
+      "title": "Today Energy Target",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "energy_unit": {
+      "default": null,
+      "title": "Energy Unit",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "energy_unit_code": {
+      "default": null,
+      "title": "Energy Unit Code",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "today_drink": {
+      "default": null,
+      "title": "Today Drink",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "today_drink_target": {
+      "default": null,
+      "title": "Today Drink Target",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "drink_unit": {
+      "default": null,
+      "title": "Drink Unit",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "today_activity": {
+      "default": null,
+      "title": "Today Activity",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "basal": {
+      "default": null,
+      "title": "Basal",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "amr": {
+      "default": null,
+      "title": "Amr",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "amr_energy": {
+      "default": null,
+      "title": "Amr Energy",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "bmi": {
+      "default": null,
+      "title": "Bmi",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "bmi_category": {
+      "default": null,
+      "title": "Bmi Category",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bmi_risk": {
+      "default": null,
+      "title": "Bmi Risk",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "mode": {
+      "default": null,
+      "title": "Mode",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "week_date": {
+      "default": null,
+      "title": "Week Date",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "week_energy": {
+      "items": {
+        "description": "One day in a weekly bar chart (energy/drink/activity).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "integer"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          }
+        },
+        "required": [
+          "title",
+          "status",
+          "value"
+        ],
+        "title": "WeekBar",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Week Energy",
+      "type": "array"
+    },
+    "week_drink": {
+      "items": {
+        "description": "One day in a weekly bar chart (energy/drink/activity).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "integer"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          }
+        },
+        "required": [
+          "title",
+          "status",
+          "value"
+        ],
+        "title": "WeekBar",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Week Drink",
+      "type": "array"
+    },
+    "week_activity": {
+      "items": {
+        "description": "One day in a weekly bar chart (energy/drink/activity).",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "integer"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          }
+        },
+        "required": [
+          "title",
+          "status",
+          "value"
+        ],
+        "title": "WeekBar",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Week Activity",
+      "type": "array"
+    },
+    "weight": {
+      "default": null,
+      "title": "Weight",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "weight_target": {
+      "default": null,
+      "title": "Weight Target",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "weight_unit": {
+      "default": null,
+      "title": "Weight Unit",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "month_weight": {
+      "items": {
+        "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+        "properties": {
+          "guid": {
+            "default": null,
+            "title": "Guid",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_from": {
+            "default": null,
+            "title": "Valid From",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_to": {
+            "default": null,
+            "title": "Valid To",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "default": null,
+            "title": "Value",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "value_string": {
+            "default": null,
+            "title": "Value String",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description": {
+            "default": null,
+            "title": "Description",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "default": null,
+            "title": "Status",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "system_time": {
+            "default": null,
+            "title": "System Time",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "default": null,
+            "title": "Source",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "title": "MeasurementPoint",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Month Weight",
+      "type": "array"
+    },
+    "month_weight_target": {
+      "items": {
+        "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+        "properties": {
+          "guid": {
+            "default": null,
+            "title": "Guid",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_from": {
+            "default": null,
+            "title": "Valid From",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_to": {
+            "default": null,
+            "title": "Valid To",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "default": null,
+            "title": "Value",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "value_string": {
+            "default": null,
+            "title": "Value String",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description": {
+            "default": null,
+            "title": "Description",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "default": null,
+            "title": "Status",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "system_time": {
+            "default": null,
+            "title": "System Time",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "default": null,
+            "title": "Source",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "title": "MeasurementPoint",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Month Weight Target",
+      "type": "array"
+    },
+    "month_weight_min": {
+      "default": null,
+      "title": "Month Weight Min",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "month_weight_max": {
+      "default": null,
+      "title": "Month Weight Max",
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "type": "object",
+  "additionalProperties": true
+}

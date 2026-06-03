@@ -1,0 +1,1522 @@
+{
+  "description": "One statistic series over a date range.\n\nFlat metrics (energy/drink/weight) use `values`/`target`/`table_data`; the\nnutrients metric uses the `nutrients_*` triplets instead. The `type` field is\nthe metric name, or the custom metric label for optional snapshots.",
+  "properties": {
+    "type": {
+      "title": "Type",
+      "type": "string"
+    },
+    "unit": {
+      "default": null,
+      "title": "Unit",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "valid_from": {
+      "default": null,
+      "title": "Valid From",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "valid_to": {
+      "default": null,
+      "title": "Valid To",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "guid": {
+      "default": null,
+      "title": "Guid",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "min": {
+      "default": null,
+      "title": "Min",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "max": {
+      "default": null,
+      "title": "Max",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "values": {
+      "items": {
+        "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+        "properties": {
+          "guid": {
+            "default": null,
+            "title": "Guid",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_from": {
+            "default": null,
+            "title": "Valid From",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_to": {
+            "default": null,
+            "title": "Valid To",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "default": null,
+            "title": "Value",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "value_string": {
+            "default": null,
+            "title": "Value String",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description": {
+            "default": null,
+            "title": "Description",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "default": null,
+            "title": "Status",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "system_time": {
+            "default": null,
+            "title": "System Time",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "default": null,
+            "title": "Source",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "title": "MeasurementPoint",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Values",
+      "type": "array"
+    },
+    "target": {
+      "items": {
+        "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+        "properties": {
+          "guid": {
+            "default": null,
+            "title": "Guid",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_from": {
+            "default": null,
+            "title": "Valid From",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valid_to": {
+            "default": null,
+            "title": "Valid To",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "default": null,
+            "title": "Value",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "value_string": {
+            "default": null,
+            "title": "Value String",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "description": {
+            "default": null,
+            "title": "Description",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "default": null,
+            "title": "Status",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "system_time": {
+            "default": null,
+            "title": "System Time",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "default": null,
+            "title": "Source",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "title": "MeasurementPoint",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Target",
+      "type": "array"
+    },
+    "table_data": {
+      "items": {
+        "description": "A value/target pair as shown in the snapshot table.",
+        "properties": {
+          "value": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "target": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "title": "SnapshotTableRow",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Table Data",
+      "type": "array"
+    },
+    "nutrients_values": {
+      "items": {
+        "description": "A dated fat/protein/carbs triplet (nutrients snapshot).",
+        "properties": {
+          "created_date": {
+            "default": null,
+            "title": "Created Date",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fat": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "protein": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "carbs": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "title": "NutrientsPoint",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Nutrients Values",
+      "type": "array"
+    },
+    "nutrients_target": {
+      "items": {
+        "description": "A dated fat/protein/carbs triplet (nutrients snapshot).",
+        "properties": {
+          "created_date": {
+            "default": null,
+            "title": "Created Date",
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fat": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "protein": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "carbs": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "title": "NutrientsPoint",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Nutrients Target",
+      "type": "array"
+    },
+    "nutrients_table_data": {
+      "items": {
+        "description": "Value/target macro pairs as shown in the nutrients snapshot table.",
+        "properties": {
+          "fat_target": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "protein_target": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "carbs_target": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "fat_value": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "protein_value": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "carbs_value": {
+            "default": null,
+            "description": "A single dated measurement (weight, energy, drink, optional metric, ...).",
+            "properties": {
+              "guid": {
+                "default": null,
+                "title": "Guid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_from": {
+                "default": null,
+                "title": "Valid From",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "valid_to": {
+                "default": null,
+                "title": "Valid To",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "value": {
+                "default": null,
+                "title": "Value",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value_string": {
+                "default": null,
+                "title": "Value String",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "default": null,
+                "title": "Description",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "status": {
+                "default": null,
+                "title": "Status",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "system_time": {
+                "default": null,
+                "title": "System Time",
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "default": null,
+                "title": "Source",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "title": "MeasurementPoint",
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          }
+        },
+        "title": "NutrientsTableRow",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Nutrients Table Data",
+      "type": "array"
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "additionalProperties": true
+}
