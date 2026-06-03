@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import date
 
 from kaloricketabulky.sdk.errors import AuthError
+from kaloricketabulky.sdk.models.diary import Diary
 
 
 class FakeKaloricClient:
@@ -25,3 +26,18 @@ class FakeKaloricClient:
 
     async def aclose(self) -> None:
         pass
+
+
+class FakeSyncClient:
+    """Infra-boundary fake for stream tests: returns SDK models without network."""
+
+    def __init__(self) -> None:
+        self.calls: list[tuple[str, date]] = []
+
+    def call(self, method: str, day: date) -> object:
+        self.calls.append((method, day))
+        if method == "get_diary":
+            return Diary.model_validate({"date": 1_700_000_000_000, "energyTotal": 100.0 + day.day})
+        if method == "get_streak":
+            return day.day
+        raise AssertionError(method)

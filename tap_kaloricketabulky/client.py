@@ -10,12 +10,16 @@ from __future__ import annotations
 import asyncio
 import atexit
 import time
+from collections.abc import Iterable, Mapping
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import httpx
 from kaloricketabulky.sdk import KaloricketabulkyClient
 from kaloricketabulky.sdk.errors import AuthError
+from singer_sdk import Stream
+from singer_sdk.helpers.types import Context
 
 SCHEMAS_DIR = Path(__file__).resolve().parent / "schemas"
 
@@ -71,3 +75,63 @@ class SyncClient:
                 self._run(self._http.aclose())
         finally:
             self._loop.close()
+
+
+def _to_date(value: str) -> date:
+    return datetime.fromisoformat(value.replace("Z", "+00:00")).date()
+
+
+class _KaloricStream(Stream):
+    """Shared access to the SyncClient and the configured date window edges."""
+
+    @property
+    def client(self) -> SyncClient:
+        return cast(SyncClient, self._tap.sync_client)  # type: ignore[attr-defined]
+
+    @property
+    def _start_floor(self) -> datetime:
+        return datetime.fromisoformat(self.config["start_date"].replace("Z", "+00:00")).astimezone(UTC)
+
+    def _end_date(self) -> date:
+        end_cfg = self.config.get("end_date")
+        return _to_date(end_cfg) if end_cfg else datetime.now(tz=UTC).date()
+
+
+class PerDayStream(_KaloricStream):
+    """INCREMENTAL: one record per calendar day; injects the queried day as `date`.
+
+    Lookback is applied by shifting the starting bookmark back, so ascending emission stays
+    valid for is_sorted=True (no InvalidStreamSortException). Same-day re-pulls within lookback
+    are the intended idempotent 'latest version of that day' behaviour.
+    """
+
+    replication_key = "date"
+    is_sorted = True
+    sdk_method: str
+
+    def get_starting_timestamp(self, context: Context | None) -> datetime | None:
+        try:
+            ts = super().get_starting_timestamp(context)
+        except ValueError:
+            return self._start_floor
+        if ts is None:
+            return None
+        lookback = timedelta(days=int(self.config.get("lookback_days", 3)))
+        return max(ts - lookback, self._start_floor)
+
+    def window(self, context: Context | None) -> tuple[date, date]:
+        ts = self.get_starting_timestamp(context)
+        start = ts.date() if ts is not None else self._start_floor.date()
+        return start, self._end_date()
+
+    def fetch(self, day: date) -> Mapping[str, object]:
+        """Return the record body for one day (without the injected `date`). Override per stream."""
+        result: Any = self.client.call(self.sdk_method, day)
+        return cast(Mapping[str, object], result.model_dump(mode="json", by_alias=False))
+
+    def get_records(self, context: Context | None) -> Iterable[dict[str, object]]:
+        start, end = self.window(context)
+        day = start
+        while day <= end:
+            yield {**self.fetch(day), "date": day.isoformat()}
+            day += timedelta(days=1)
