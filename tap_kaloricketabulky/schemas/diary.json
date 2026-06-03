@@ -1,0 +1,593 @@
+{
+  "description": "A single day's diary: meals, activities, and rolled-up totals.",
+  "properties": {
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "energy_unit": {
+      "default": null,
+      "title": "Energy Unit",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "energy_total": {
+      "default": null,
+      "title": "Energy Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "energy_plus": {
+      "default": null,
+      "title": "Energy Plus",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "energy_minus": {
+      "default": null,
+      "title": "Energy Minus",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "protein_total": {
+      "default": null,
+      "title": "Protein Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "carbohydrate_total": {
+      "default": null,
+      "title": "Carbohydrate Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "fat_total": {
+      "default": null,
+      "title": "Fat Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "fiber_total": {
+      "default": null,
+      "title": "Fiber Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "sugar_total": {
+      "default": null,
+      "title": "Sugar Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "salt_total": {
+      "default": null,
+      "title": "Salt Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "saturated_fatty_acid_total": {
+      "default": null,
+      "title": "Saturated Fatty Acid Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "calcium_total": {
+      "default": null,
+      "title": "Calcium Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "phe_total": {
+      "default": null,
+      "title": "Phe Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "foodstuff_count": {
+      "default": null,
+      "title": "Foodstuff Count",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "drink_regime": {
+      "default": null,
+      "title": "Drink Regime",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "meals": {
+      "items": {
+        "description": "A named meal slot (e.g. Snídaně) holding its foodstuffs.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "title": {
+            "default": null,
+            "title": "Title",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "items": {
+            "items": {
+              "description": "A food entry within a meal.",
+              "properties": {
+                "id": {
+                  "title": "Id",
+                  "type": "string"
+                },
+                "type": {
+                  "title": "Type",
+                  "type": "string"
+                },
+                "guid_type": {
+                  "default": null,
+                  "title": "Guid Type",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "title": {
+                  "default": null,
+                  "title": "Title",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "unit": {
+                  "default": null,
+                  "title": "Unit",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "url": {
+                  "default": null,
+                  "title": "Url",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "status": {
+                  "default": null,
+                  "title": "Status",
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "energy": {
+                  "default": null,
+                  "title": "Energy",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "energy_unit": {
+                  "default": null,
+                  "title": "Energy Unit",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "protein": {
+                  "default": null,
+                  "title": "Protein",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "carbohydrate": {
+                  "default": null,
+                  "title": "Carbohydrate",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "fat": {
+                  "default": null,
+                  "title": "Fat",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "fiber": {
+                  "default": null,
+                  "title": "Fiber",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "sugar": {
+                  "default": null,
+                  "title": "Sugar",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "salt": {
+                  "default": null,
+                  "title": "Salt",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "saturated_fatty_acid": {
+                  "default": null,
+                  "title": "Saturated Fatty Acid",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "trans_fatty_acid": {
+                  "default": null,
+                  "title": "Trans Fatty Acid",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "mono_saturated": {
+                  "default": null,
+                  "title": "Mono Saturated",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "poly_saturated": {
+                  "default": null,
+                  "title": "Poly Saturated",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "cholesterol": {
+                  "default": null,
+                  "title": "Cholesterol",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "sodium": {
+                  "default": null,
+                  "title": "Sodium",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "calcium": {
+                  "default": null,
+                  "title": "Calcium",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "phe": {
+                  "default": null,
+                  "title": "Phe",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "alcohol": {
+                  "default": null,
+                  "title": "Alcohol",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "water": {
+                  "default": null,
+                  "title": "Water",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "type"
+              ],
+              "title": "DiaryFoodstuff",
+              "type": "object",
+              "additionalProperties": true
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "Meal",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Meals",
+      "type": "array"
+    },
+    "activities": {
+      "items": {
+        "description": "A logged physical activity (burns energy; may carry a step count).",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "guid_type": {
+            "default": null,
+            "title": "Guid Type",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "default": null,
+            "title": "Title",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "default": null,
+            "title": "Unit",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "default": null,
+            "title": "Url",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "default": null,
+            "title": "Status",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "energy": {
+            "default": null,
+            "title": "Energy",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "energy_unit": {
+            "default": null,
+            "title": "Energy Unit",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "protein": {
+            "default": null,
+            "title": "Protein",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "carbohydrate": {
+            "default": null,
+            "title": "Carbohydrate",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "fat": {
+            "default": null,
+            "title": "Fat",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "fiber": {
+            "default": null,
+            "title": "Fiber",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "sugar": {
+            "default": null,
+            "title": "Sugar",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "salt": {
+            "default": null,
+            "title": "Salt",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "saturated_fatty_acid": {
+            "default": null,
+            "title": "Saturated Fatty Acid",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "trans_fatty_acid": {
+            "default": null,
+            "title": "Trans Fatty Acid",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "mono_saturated": {
+            "default": null,
+            "title": "Mono Saturated",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "poly_saturated": {
+            "default": null,
+            "title": "Poly Saturated",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "cholesterol": {
+            "default": null,
+            "title": "Cholesterol",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "sodium": {
+            "default": null,
+            "title": "Sodium",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "calcium": {
+            "default": null,
+            "title": "Calcium",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "phe": {
+            "default": null,
+            "title": "Phe",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "alcohol": {
+            "default": null,
+            "title": "Alcohol",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "water": {
+            "default": null,
+            "title": "Water",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "activity_type": {
+            "default": null,
+            "title": "Activity Type",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "steps": {
+            "default": null,
+            "title": "Steps",
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "title": "DiaryActivity",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Activities",
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "additionalProperties": true
+}

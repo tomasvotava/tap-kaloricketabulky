@@ -1,0 +1,365 @@
+{
+  "description": "The diary summary endpoint: progress items plus daily roll-ups.",
+  "properties": {
+    "items": {
+      "items": {
+        "description": "A goal/actual progress row. Display strings are kept; goal exposes a parsed value.",
+        "properties": {
+          "title": {
+            "default": null,
+            "title": "Title",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title_short": {
+            "default": null,
+            "title": "Title Short",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "default": null,
+            "title": "Unit",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "goal": {
+            "default": null,
+            "title": "Goal",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "actual": {
+            "default": null,
+            "title": "Actual",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "percent": {
+            "default": null,
+            "title": "Percent",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "actual_value": {
+            "default": null,
+            "title": "Actual Value",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "code": {
+            "default": null,
+            "title": "Code",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "goal_value": {
+            "description": "The `goal` display string parsed to a float.",
+            "readOnly": true,
+            "title": "Goal Value",
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "goal_value"
+        ],
+        "title": "SummaryItem",
+        "type": "object",
+        "additionalProperties": true
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "items_dynamic": {
+      "items": {
+        "items": {
+          "description": "A goal/actual progress row. Display strings are kept; goal exposes a parsed value.",
+          "properties": {
+            "title": {
+              "default": null,
+              "title": "Title",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "title_short": {
+              "default": null,
+              "title": "Title Short",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "unit": {
+              "default": null,
+              "title": "Unit",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "goal": {
+              "default": null,
+              "title": "Goal",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "actual": {
+              "default": null,
+              "title": "Actual",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "percent": {
+              "default": null,
+              "title": "Percent",
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "actual_value": {
+              "default": null,
+              "title": "Actual Value",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "code": {
+              "default": null,
+              "title": "Code",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "goal_value": {
+              "description": "The `goal` display string parsed to a float.",
+              "readOnly": true,
+              "title": "Goal Value",
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "goal_value"
+          ],
+          "title": "SummaryItem",
+          "type": "object",
+          "additionalProperties": true
+        },
+        "type": "array"
+      },
+      "title": "Items Dynamic",
+      "type": "array"
+    },
+    "activity_energy_total": {
+      "default": null,
+      "title": "Activity Energy Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "foodstuff_energy_total": {
+      "default": null,
+      "title": "Foodstuff Energy Total",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "weight": {
+      "default": null,
+      "title": "Weight",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "alcohol": {
+      "default": null,
+      "title": "Alcohol",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "nutrients_from_activities": {
+      "default": null,
+      "title": "Nutrients From Activities",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "mode": {
+      "default": null,
+      "title": "Mode",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "balance": {
+      "default": null,
+      "description": "Energy in/out breakdown (localized number strings parsed to floats).",
+      "properties": {
+        "energy_output_total": {
+          "default": null,
+          "title": "Energy Output Total",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "energy_intake_maintenance": {
+          "default": null,
+          "title": "Energy Intake Maintenance",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "energy_deficit": {
+          "default": null,
+          "title": "Energy Deficit",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "target": {
+          "default": null,
+          "title": "Target",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "basal": {
+          "default": null,
+          "title": "Basal",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "intake": {
+          "default": null,
+          "title": "Intake",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "intake_percent": {
+          "default": null,
+          "title": "Intake Percent",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "intake_rest": {
+          "default": null,
+          "title": "Intake Rest",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "intake_rest_percent": {
+          "default": null,
+          "title": "Intake Rest Percent",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "output": {
+          "default": null,
+          "title": "Output",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "digestion": {
+          "default": null,
+          "title": "Digestion",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "consider_activity": {
+          "default": null,
+          "title": "Consider Activity",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "own_target": {
+          "default": null,
+          "title": "Own Target",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "own_target_value": {
+          "default": null,
+          "title": "Own Target Value",
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "title": "DiaryBalance",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    }
+  },
+  "type": "object",
+  "additionalProperties": true
+}
