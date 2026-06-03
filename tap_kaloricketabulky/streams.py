@@ -86,4 +86,4 @@ class SnapshotOptionalStream(_SnapshotStream):
     name = "snapshot_optional"
     sdk_method = "get_optional_snapshots"
     metric = None
-    primary_keys = ("guid",)  # one record per custom metric; guid is its stable id
+    primary_keys = ("guid",)  # custom metrics always carry a server guid; relied on as the stable id
