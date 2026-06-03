@@ -1,129 +1,140 @@
 # tap-kaloricketabulky
 
-`tap-kaloricketabulky` is a Singer tap for Kaloricketabulky.
+A Singer tap (Meltano SDK) for extracting a user's own data from
+[kaloricketabulky.cz](https://www.kaloricketabulky.cz). Built on the
+[kaloricketabulky-sdk](https://github.com/tomasvotava/kaloricketabulky).
 
-Built with the [Meltano Tap SDK](https://sdk.meltano.com) for Singer Taps.
+> The site has no official public API. This tap uses the same unofficial endpoints the
+> web app uses. Use it for your own data only, be a respectful guest: keep
+> `request_delay_seconds` at 0.5 s or higher and don't hammer the site. If you get
+> value from kaloricketabulky.cz, consider
+> [supporting them with a subscription](https://www.kaloricketabulky.cz/user/premium/public).
 
-<!--
+## Requirements
 
-Developer TODO: Update the below as needed to correctly describe the install procedure. For instance, if you do not have a PyPI repo, or if you want users to directly install from your git repo, you can modify this step as appropriate.
-
-## Installation
-
-Install from PyPI:
-
-```bash
-uv tool install tap-kaloricketabulky
-```
-
-Install from GitHub:
-
-```bash
-uv tool install git+https://github.com/ORG_NAME/tap-kaloricketabulky.git@main
-```
-
--->
+- Python >= 3.12
+- [uv](https://docs.astral.sh/uv/)
 
 ## Configuration
 
-### Accepted Config Options
+Settings can be supplied via a `config.json` file or as environment variables prefixed
+`TAP_KALORICKETABULKY_` (the standard Meltano/Singer SDK convention).
 
-<!--
-Developer TODO: Provide a list of config options accepted by the tap.
+| Setting | Required | Type | Default | Description |
+|---|---|---|---|---|
+| `email` | yes | string (secret) | — | Login e-mail address |
+| `password` | yes | string (secret) | — | Login password |
+| `start_date` | yes | date-time | — | Earliest day to extract (ISO 8601, e.g. `2025-01-01T00:00:00Z`) |
+| `end_date` | no | date-time | today | Latest day to extract |
+| `lookback_days` | no | integer | `3` | Days before the bookmark to re-pull on each run |
+| `request_delay_seconds` | no | float | `0.5` | Seconds to wait between API requests |
+| `base_url` | no | string | `https://www.kaloricketabulky.cz` | Override the API base URL |
+| `user_agent` | no | string | SDK default | Override the `User-Agent` request header |
 
-This section can be created by copy-pasting the CLI output from:
+## Streams
 
-```
-tap-kaloricketabulky --about --format=markdown
-```
--->
+### Per-day — INCREMENTAL (replication key: `date`)
 
-A full list of supported settings and capabilities for this
-tap is available by running:
+| Stream | SDK method |
+|---|---|
+| `diary` | `get_diary` |
+| `diary_summary` | `get_diary_summary` |
+| `statistics_summary` | `get_statistics_summary` |
+| `streak` | `get_streak` |
 
-```bash
-tap-kaloricketabulky --about
-```
+### Snapshots — FULL_TABLE
 
-### Configure using environment variables
+| Stream | Metric |
+|---|---|
+| `snapshot_energy` | energy |
+| `snapshot_nutrients` | nutrients |
+| `snapshot_drink` | drink |
+| `snapshot_weight` | weight |
+| `snapshot_optional` | user-defined custom metrics |
 
-This Singer tap will automatically import any environment variables within the working directory's
-`.env` if the `--config=ENV` is provided, such that config values will be considered if a matching
-environment variable is set either in the terminal context or in the `.env` file.
+Records are emitted faithfully and with nested structure matching the SDK models. To flatten
+nested fields into columns, enable the SDK's built-in flattener via
+`flattening_enabled: true` and `flattening_max_depth: <n>` in your config.
 
-### Source Authentication and Authorization
+## Incremental and lookback behaviour
 
-<!--
-Developer TODO: If your tap requires special access on the source system, or any special authentication requirements, provide those here.
--->
+Per-day streams resume from Singer state. On each run, the tap re-pulls the last
+`lookback_days` days before the stored bookmark so that late diary entries (people
+often log calories a day or two after the fact) are captured without a full backfill.
+
+Snapshot streams are FULL_TABLE: each run pulls the complete `[start_date, today]`
+series in a single request per metric, so late edits to past days are always reflected.
+Dedup downstream by measurement day if needed.
+
+Lowering `start_date` after the first run requires resetting Singer state to backfill
+the newly included range (standard Singer behaviour).
 
 ## Usage
 
-You can easily run `tap-kaloricketabulky` by itself or in a pipeline using [Meltano](https://meltano.com/).
-
-### Executing the Tap Directly
+### CLI
 
 ```bash
-tap-kaloricketabulky --version
-tap-kaloricketabulky --help
-tap-kaloricketabulky --config CONFIG --discover > ./catalog.json
+uv run tap-kaloricketabulky --about --format=json
+uv run tap-kaloricketabulky --config config.json --discover > catalog.json
+uv run tap-kaloricketabulky --config config.json --catalog catalog.json
 ```
 
-## Developer Resources
+### Meltano
 
-Follow these instructions to contribute to this project.
+```yaml
+plugins:
+  extractors:
+  - name: tap-kaloricketabulky
+    namespace: tap_kaloricketabulky
+    pip_url: -e .
+    capabilities:
+    - state
+    - catalog
+    - discover
+    - about
+    - stream-maps
+    settings:
+    - name: email
+      kind: password
+      label: Email
+    - name: password
+      kind: password
+      label: Password
+    - name: start_date
+      kind: date_iso8601
+      label: Start Date
+    settings_group_validation:
+    - [email, password, start_date]
+    config:
+      start_date: "2025-01-01T00:00:00Z"
+      request_delay_seconds: 0.5
+```
 
-### Initialize your Development Environment
-
-Prerequisites:
-
-- Python 3.10+
-- [uv](https://docs.astral.sh/uv/)
+## Development
 
 ```bash
-uv sync
+uv sync                                    # create the environment from the lockfile
+uv run ruff format --check .               # check formatting
+uv run ruff check .                        # lint
+uv run mypy tap_kaloricketabulky tests     # strict type-check
+uv run pytest                              # run tests with coverage
+uv run python scripts/gen_schemas.py       # regenerate schemas from SDK models
 ```
 
-### Create and Run Tests
+Never hand-edit the JSON files under `tap_kaloricketabulky/schemas/`; they are generated
+from the SDK's Pydantic models. A drift test (`tests/test_schemas.py`) fails the suite if
+the committed schemas fall out of sync with the models.
 
-Create tests within the `tests` subfolder and
-then run:
+## Releases
+
+Versioning and the changelog are driven by
+[Commitizen](https://commitizen-tools.github.io/commitizen/).
+Do not edit `CHANGELOG.md` by hand:
 
 ```bash
-uv run pytest
+uv run cz bump
 ```
 
-You can also test the `tap-kaloricketabulky` CLI interface directly using `uv run`:
+## License
 
-```bash
-uv run tap-kaloricketabulky --help
-```
-
-### Testing with [Meltano](https://www.meltano.com)
-
-_**Note:** This tap will work in any Singer environment and does not require Meltano.
-Examples here are for convenience and to streamline end-to-end orchestration scenarios._
-
-<!--
-Developer TODO:
-Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any "TODO" items listed in
-the file.
--->
-
-Use Meltano to run an EL pipeline:
-
-```bash
-# Install meltano
-uv tool install meltano
-
-# Test invocation
-meltano invoke tap-kaloricketabulky --version
-
-# Run a test EL pipeline
-meltano run tap-kaloricketabulky target-jsonl
-```
-
-### SDK Dev Guide
-
-See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to
-develop your own taps and targets.
+MIT
