@@ -89,8 +89,8 @@ class _KaloricStream(Stream):
         return cast(SyncClient, self._tap.sync_client)  # type: ignore[attr-defined]
 
     @property
-    def _start_floor(self) -> datetime:
-        return datetime.fromisoformat(self.config["start_date"].replace("Z", "+00:00")).astimezone(UTC)
+    def _start_floor(self) -> date:
+        return _to_date(self.config["start_date"])
 
     def _end_date(self) -> date:
         end_cfg = self.config.get("end_date")
@@ -117,7 +117,7 @@ class RangeSnapshotStream(_KaloricStream):
         return [self.client.call(self.sdk_method, self.metric, start, end)]
 
     def get_records(self, context: Context | None) -> Iterable[dict[str, object]]:
-        start, end = self._start_floor.date(), self._end_date()
+        start, end = self._start_floor, self._end_date()
         for snap in self._fetch(start, end):
             yield cast(dict[str, object], cast(Any, snap).model_dump(mode="json", by_alias=False))
 
@@ -132,7 +132,7 @@ class PerDayStream(_KaloricStream):
     sdk_method: str
 
     def window(self, context: Context | None) -> tuple[date, date]:
-        floor = self._start_floor.date()
+        floor = self._start_floor
         raw = self.get_starting_replication_key_value(context)
         if raw is None:  # first run: no prior bookmark
             return floor, self._end_date()

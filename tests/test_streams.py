@@ -85,6 +85,13 @@ def test_optional_snapshot_emits_one_record_per_metric() -> None:
     assert {r["type"] for r in records} == {"Steps", "Mood"}
 
 
+def test_window_start_uses_literal_date_for_nonutc_offset() -> None:
+    # +02:00 midnight must not roll back to the previous calendar day
+    stream = cast(PerDayStream, _tap(start_date="2026-01-01T00:00:00+02:00").streams["streak"])
+    start, _ = stream.window(None)
+    assert start == date(2026, 1, 1)
+
+
 def test_window_resumes_from_bookmark_minus_lookback() -> None:
     state = {"bookmarks": {"diary": {"replication_key": "date", "replication_key_value": "2026-03-10"}}}
     tap = TapKaloricketabulky(config=BASE_CONFIG, state=state, validate_config=False)

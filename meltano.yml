@@ -9,33 +9,64 @@ plugins:
   - name: "tap-kaloricketabulky"
     namespace: "tap_kaloricketabulky"
     pip_url: -e .
+    executable: tap-kaloricketabulky
     capabilities:
-    - state
     - catalog
+    - state
     - discover
     - about
     - stream-maps
-    - structured-logging
+    - schema-flattening
 
-    # TODO: Declare settings and their types here:
     settings:
-    - name: auth_token
-      label: Auth Token
-      description: The token to authenticate against Kaloricketabulky
-      sensitive: true
+    - name: email
+      kind: password
+      label: Email
+      description: Login email address for kaloricketabulky.cz.
+
+    - name: password
+      kind: password
+      label: Password
+      description: Login password for kaloricketabulky.cz.
 
     - name: start_date
       kind: date_iso8601
       label: Start Date
-      description: Initial date to start extracting data from
+      description: Earliest date to sync; records before this date are ignored.
 
-    # TODO: Declare required settings here:
+    - name: end_date
+      kind: date_iso8601
+      label: End Date
+      description: Latest date to sync (inclusive). Defaults to today when omitted.
+
+    - name: lookback_days
+      kind: integer
+      label: Lookback Days
+      description: Number of days before the last bookmark to re-sync on incremental runs.
+      value: 3
+
+    - name: request_delay_seconds
+      kind: decimal
+      label: Request Delay (seconds)
+      description: Seconds to wait between API requests to avoid hammering the server.
+      value: 0.5
+
+    - name: base_url
+      kind: string
+      label: Base URL
+      description: Override the kaloricketabulky.cz base URL (e.g. for testing).
+
+    - name: user_agent
+      kind: string
+      label: User Agent
+      description: Custom User-Agent header sent with every request.
+
     settings_group_validation:
-    - [auth_token]
+    - [email, password, start_date]
 
-    # TODO: Declare default configuration values here:
     config:
-      start_date: 6 months ago
+      start_date: '2024-01-01T00:00:00Z'
+      lookback_days: 3
 
   loaders:
   - name: target-jsonl
