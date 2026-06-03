@@ -1,0 +1,83 @@
+[project]
+name = "tap-kaloricketabulky"
+version = "0.1.0"
+description = "Singer tap for kaloricketabulky.cz, built with the Meltano Singer SDK."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Tomas Votava", email = "info@tomasvotava.eu" }]
+requires-python = ">=3.12"
+keywords = ["ELT", "singer", "meltano", "kaloricketabulky", "calories", "nutrition"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
+]
+dependencies = [
+    "kaloricketabulky-sdk<1",
+    "singer-sdk~=0.54.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/tomasvotava/tap-kaloricketabulky"
+Repository = "https://github.com/tomasvotava/tap-kaloricketabulky"
+Changelog = "https://github.com/tomasvotava/tap-kaloricketabulky/blob/master/CHANGELOG.md"
+
+[project.scripts]
+tap-kaloricketabulky = "tap_kaloricketabulky.tap:TapKaloricketabulky.cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tap_kaloricketabulky"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+src = ["tap_kaloricketabulky", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I", "N", "UP", "S", "A", "DTZ", "PT", "SIM", "PTH", "PD", "RUF", "T20"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "RUF018"]
+
+[tool.mypy]
+strict = true
+
+[tool.pytest.ini_options]
+addopts = [
+    "-vv",
+    "--cov=tap_kaloricketabulky",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+    "tests/",
+]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "semver"
+version_provider = "pep621"
+update_changelog_on_bump = true
+major_version_zero = true
+changelog_incremental = true
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.16.3",
+    "jsonschema>=4.26.0",
+    "mypy>=2.1.0",
+    "pre-commit>=4.6.0",
+    "pytest>=9.0.3",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.15.15",
+]
