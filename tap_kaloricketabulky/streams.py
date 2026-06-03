@@ -7,6 +7,8 @@ from datetime import date
 from typing import ClassVar
 
 from kaloricketabulky.sdk.models.snapshot import SnapshotType
+from singer_sdk import StreamSchema
+from singer_sdk.schema.source import SchemaDirectory
 
 from tap_kaloricketabulky.client import SCHEMAS_DIR, PerDayStream, RangeSnapshotStream
 
@@ -15,21 +17,21 @@ class DiaryStream(PerDayStream):
     name = "diary"
     sdk_method = "get_diary"
     primary_keys = ("date",)
-    schema_filepath = SCHEMAS_DIR / "diary.json"
+    schema = StreamSchema(SchemaDirectory(SCHEMAS_DIR))
 
 
 class DiarySummaryStream(PerDayStream):
     name = "diary_summary"
     sdk_method = "get_diary_summary"
     primary_keys = ("date",)
-    schema_filepath = SCHEMAS_DIR / "diary_summary.json"
+    schema = StreamSchema(SchemaDirectory(SCHEMAS_DIR))
 
 
 class StatisticsSummaryStream(PerDayStream):
     name = "statistics_summary"
     sdk_method = "get_statistics_summary"
     primary_keys = ("date",)
-    schema_filepath = SCHEMAS_DIR / "statistics_summary.json"
+    schema = StreamSchema(SchemaDirectory(SCHEMAS_DIR))
 
 
 class StreakStream(PerDayStream):
@@ -53,7 +55,7 @@ class StreakStream(PerDayStream):
 
 class _SnapshotStream(RangeSnapshotStream):
     primary_keys = ("type",)  # one record per run; `type` is the metric name
-    schema_filepath = SCHEMAS_DIR / "snapshot.json"
+    schema = StreamSchema(SchemaDirectory(SCHEMAS_DIR), key="snapshot")
 
 
 class SnapshotEnergyStream(_SnapshotStream):
