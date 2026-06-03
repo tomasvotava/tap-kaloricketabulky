@@ -1,6 +1,7 @@
 from datetime import UTC, date, datetime
 from typing import cast
 
+from kaloricketabulky.sdk.models.snapshot import Snapshot
 from tap_kaloricketabulky.client import PerDayStream
 from tap_kaloricketabulky.tap import TapKaloricketabulky
 
@@ -49,6 +50,39 @@ def test_streak_record_shape() -> None:
     tap = _tap_with_fake(start_date="2026-03-01T00:00:00Z", end_date="2026-03-01T00:00:00Z", lookback_days=0)
     records = cast(list[dict[str, object]], list(tap.streams["streak"].get_records(None)))
     assert records == [{"date": "2026-03-01", "streak": 1}]
+
+
+def test_weight_snapshot_is_full_table_over_complete_window() -> None:
+    captured: dict[str, tuple[object, ...]] = {}
+
+    class FakeSnap:
+        def call(self, method: str, *args: object) -> object:
+            assert method == "get_snapshot"
+            captured["args"] = args  # (metric, start, end)
+            return Snapshot.model_validate({"type": "weight", "unit": "kg", "min": 70.0, "max": 72.0})
+
+    # lookback_days set high to prove FULL_TABLE ignores it and always starts at start_date.
+    tap = _tap(start_date="2026-03-01T00:00:00Z", end_date="2026-03-05T00:00:00Z", lookback_days=99)
+    tap.__dict__["sync_client"] = FakeSnap()
+    stream = tap.streams["snapshot_weight"]
+    assert stream.replication_method == "FULL_TABLE"
+    records = cast(list[dict[str, object]], list(stream.get_records(None)))
+    assert len(records) == 1
+    assert records[0]["type"] == "weight"
+    _metric, start, end = captured["args"]
+    assert (start, end) == (date(2026, 3, 1), date(2026, 3, 5))
+
+
+def test_optional_snapshot_emits_one_record_per_metric() -> None:
+    class FakeOpt:
+        def call(self, method: str, *args: object) -> object:
+            assert method == "get_optional_snapshots"
+            return [Snapshot.model_validate({"type": "Steps"}), Snapshot.model_validate({"type": "Mood"})]
+
+    tap = _tap(start_date="2026-03-01T00:00:00Z", end_date="2026-03-05T00:00:00Z", lookback_days=0)
+    tap.__dict__["sync_client"] = FakeOpt()
+    records = cast(list[dict[str, object]], list(tap.streams["snapshot_optional"].get_records(None)))
+    assert {r["type"] for r in records} == {"Steps", "Mood"}
 
 
 def test_window_resumes_from_bookmark_minus_lookback() -> None:

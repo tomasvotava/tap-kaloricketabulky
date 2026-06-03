@@ -11,6 +11,11 @@ from tap_kaloricketabulky.client import SyncClient
 from tap_kaloricketabulky.streams import (
     DiaryStream,
     DiarySummaryStream,
+    SnapshotDrinkStream,
+    SnapshotEnergyStream,
+    SnapshotNutrientsStream,
+    SnapshotOptionalStream,
+    SnapshotWeightStream,
     StatisticsSummaryStream,
     StreakStream,
 )
@@ -20,6 +25,11 @@ STREAM_TYPES: list[type[Stream]] = [
     DiarySummaryStream,
     StatisticsSummaryStream,
     StreakStream,
+    SnapshotEnergyStream,
+    SnapshotNutrientsStream,
+    SnapshotDrinkStream,
+    SnapshotWeightStream,
+    SnapshotOptionalStream,
 ]
 
 
