@@ -68,6 +68,7 @@ class SyncClient:
             return self._run(getattr(self._client, method)(*args))
 
     def close(self) -> None:
+        atexit.unregister(self.close)  # drop the strong ref so the instance can be collected
         if self._loop.is_closed():
             return
         try:
@@ -78,7 +79,7 @@ class SyncClient:
 
 
 def _to_date(value: str) -> date:
-    return datetime.fromisoformat(value.replace("Z", "+00:00")).date()
+    return datetime.fromisoformat(value).date()
 
 
 class _KaloricStream(Stream):
