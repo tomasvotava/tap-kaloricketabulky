@@ -86,7 +86,7 @@ plugins:
   extractors:
   - name: tap-kaloricketabulky
     namespace: tap_kaloricketabulky
-    pip_url: git+https://github.com/tomasvotava/tap-kaloricketabulky.git
+    pip_url: tap-kaloricketabulky
     capabilities:
     - state
     - catalog
