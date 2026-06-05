@@ -95,10 +95,12 @@ plugins:
     - stream-maps
     settings:
     - name: email
-      kind: password
+      kind: string
+      sensitive: true
       label: Email
     - name: password
-      kind: password
+      kind: string
+      sensitive: true
       label: Password
     - name: start_date
       kind: date_iso8601
