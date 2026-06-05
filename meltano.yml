@@ -20,12 +20,14 @@ plugins:
 
     settings:
     - name: email
-      kind: password
+      kind: string
+      sensitive: true
       label: Email
       description: Login email address for kaloricketabulky.cz.
 
     - name: password
-      kind: password
+      kind: string
+      sensitive: true
       label: Password
       description: Login password for kaloricketabulky.cz.
 
