@@ -4,6 +4,8 @@ config.json
 # Ignore meltano internal cache and sqlite systemdb
 
 .meltano/
+# Meltano-installed plugins (lock files) — this meltano.yml is a local dev convenience, not a deployment project
+/plugins/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
